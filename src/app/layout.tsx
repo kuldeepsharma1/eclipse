@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lexend_Deca } from "next/font/google";
 import "./globals.css";
+import Footer from "@/components/Base/Footer";
 
 const lexendSans = Lexend_Deca({
   variable: "--font-lexend-sans",
@@ -25,6 +26,7 @@ export default function RootLayout({
         className={`${lexendSans.variable}  antialiased`}
       >
         {children}
+        <Footer />
       </body>
     </html>
   );

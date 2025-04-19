@@ -61,10 +61,11 @@ export default function Header() {
                     <div className="flex items-center justify-between h-16 lg:h-20">
                         {/* Left Navigation - Desktop */}
                         <div className="hidden lg:flex items-center space-x-8">
-                            <Link href="/shop" className="text-sm font-medium hover:text-neutral-600 transition-colors">Shop</Link>
-                            <Link href="/new" className="text-sm font-medium hover:text-neutral-600 transition-colors">New In</Link>
-                            <Link href="/collections" className="text-sm font-medium hover:text-neutral-600 transition-colors">Collections</Link>
-                            <Link href="/sale" className="text-sm font-medium text-red-600 hover:text-red-700 transition-colors">Sale</Link>
+                            <Link href="/" className="text-sm font-medium hover:text-neutral-600 transition-colors hover:underline">Home</Link>
+                            <Link href="/shop" className="text-sm font-medium hover:text-neutral-600 transition-colors hover:underline">Shop</Link>
+                            <Link href="/new" className="text-sm font-medium hover:text-neutral-600 transition-colors hover:underline">New In</Link>
+                            <Link href="/collections" className="text-sm font-medium hover:text-neutral-600 transition-colors hover:underline">Collections</Link>
+                            <Link href="/sale" className="text-sm font-medium text-red-600 hover:text-red-700 transition-colors hover:underline">Sale</Link>
                         </div>
 
                         {/* Logo - Centered on all screens */}

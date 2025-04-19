@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Eclipse
 
-## Getting Started
+Eclipse is a modern and sophisticated fashion brand specializing in high-quality t-shirts with unique designs.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 🎨 Unique Design Collections
+- 👕 Premium Quality T-shirts
+- 📱 Responsive Online Store
+- 🛍️ Secure Shopping Experience
+- 🚚 Worldwide Shipping
+- 💳 Multiple Payment Options
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Shop Online
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Visit our online store at [eclipse.com](https://eclipse.com) to browse our latest collections.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Collection Highlights
 
-## Learn More
+- Minimalist Series
+- Urban Collection
+- Artist Collaborations
+- Limited Editions
 
-To learn more about Next.js, take a look at the following resources:
+## Customer Service
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+For inquiries about orders, sizing, or returns:
+- Email: support@eclipse.com
+- Phone: 
+- Hours: Monday-Friday, 9AM-5PM EST
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Follow Us
 
-## Deploy on Vercel
+Stay updated with our latest releases and fashion trends:
+- Instagram: 
+- Twitter:
+- Facebook: 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Returns Policy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+We offer a 30-day return policy on all unworn items.

@@ -18,7 +18,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-
+import { useIsMobile } from '@/hooks/use-mobile';
 // Sort Options
 const sortOptions = [
   { label: 'Price: Low to High', value: 'price-asc' },
@@ -30,6 +30,7 @@ const sortOptions = [
 
 // Shop Page Component
 export default function ShopPage() {
+  const isMobile = useIsMobile();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -37,17 +38,11 @@ export default function ShopPage() {
   const [category, setCategory] = useState<string>('all');
   const [priceRange, setPriceRange] = useState<number[]>([0, 5000]);
   const [sortBy, setSortBy] = useState('price-asc');
-  const [isMobile, setIsMobile] = useState(false);
+
   const { addItem } = useCartStore();
   const { items: wishlistItems, addWishlistItem, removeItem, isInWishlist } = useWishlistStore();
 
-  // Check for mobile view
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+
 
   // Fetch products
   useEffect(() => {
@@ -227,7 +222,7 @@ export default function ShopPage() {
                   <CardFooter className="p-5 pt-0 flex flex-col space-y-3">
                     <Button
                       onClick={() => {
-                        addItem({ id: product.id, name: product.name, price: product.price, quantity: 1 });
+                        addItem({ id: product.id, name: product.name,image:product.image, price: product.price, quantity: 1 });
                         toast.success(`${product.name} added to cart`);
                       }}
                       className="w-full bg-blue-600 hover:bg-blue-700 text-white"
@@ -239,8 +234,8 @@ export default function ShopPage() {
                       variant={isInWishlist(product.id) ? 'default' : 'outline'}
                       onClick={() => handleWishlistToggle(product)}
                       className={`w-full ${isInWishlist(product.id)
-                          ? 'bg-red-500 hover:bg-red-600 text-white'
-                          : 'border-gray-300 text-gray-700 hover:bg-gray-100'
+                        ? 'bg-red-500 hover:bg-red-600 text-white'
+                        : 'border-gray-300 text-gray-700 hover:bg-gray-100'
                         }`}
                     >
                       <Heart

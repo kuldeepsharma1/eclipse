@@ -217,10 +217,8 @@ export default function ShopPage() {
                   Filters {activeFilterCount > 0 && `(${activeFilterCount})`}
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-full max-w-sm">
-                <SheetHeader>
-                  <SheetTitle>Filters</SheetTitle>
-                </SheetHeader>
+              <SheetContent side="left" className="w-full px-4 pt-14 max-w-xs">
+           
                 {FiltersComponent}
               </SheetContent>
             </Sheet>
@@ -250,14 +248,9 @@ export default function ShopPage() {
           {/* Desktop Filters */}
           {!isMobile && (
             <div className="col-span-1">
-              <Card className="sticky top-6">
-                <CardHeader className="pb-4">
-                  <CardTitle>Filters</CardTitle>
-                </CardHeader>
-                <CardContent>
+              <div className="sticky top-6">
                   {FiltersComponent}
-                </CardContent>
-              </Card>
+              </div>
             </div>
           )}
 

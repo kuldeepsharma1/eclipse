@@ -163,7 +163,7 @@ export default function Header() {
                                             <Link href="/auth/login" className="block px-4 py-2 text-sm hover:bg-neutral-50 transition-colors">Sign In</Link>
                                             <Link href="/auth/register" className="block px-4 py-2 text-sm hover:bg-neutral-50 transition-colors">Create Account</Link>
                                             <Link href="/account/orders" className="block px-4 py-2 text-sm hover:bg-neutral-50 transition-colors">Orders</Link>
-                                            <Link href="/account/wishlist" className="block px-4 py-2 text-sm hover:bg-neutral-50 transition-colors">Wishlist</Link>
+                                            <Link href="/wishlist" className="block px-4 py-2 text-sm hover:bg-neutral-50 transition-colors">Wishlist</Link>
                                             <Link href="/account/settings" className="block px-4 py-2 text-sm hover:bg-neutral-50 transition-colors">Settings</Link>
                                         </div>
                                     </div>

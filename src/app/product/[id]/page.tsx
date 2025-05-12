@@ -108,7 +108,7 @@ export default function ProductPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const { addItem } = useCartStore();
-  const { addWishlistItem, removeItem, isInWishlist } = useWishlistStore();
+  const { addItem:addWishlistItem, removeItem, isInWishlist } = useWishlistStore();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   useEffect(() => {

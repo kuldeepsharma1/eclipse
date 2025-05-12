@@ -1,7 +1,7 @@
-// store/cart.ts
+
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { Product, ShippingInfo, TaxInfo } from '@/types/product';
+import {  ShippingInfo, TaxInfo } from '@/types/product';
 
 interface CartItem {
   id: string;

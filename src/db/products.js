@@ -31,11 +31,6 @@ const data = [
         images: [
           "https://images.unsplash.com/photo-1640465978467-fa011a5dfb0a",
           "https://images.unsplash.com/photo-1640465978467-fa011a5dfb0a",
-          "https://images.unsplash.com/photo-1640465978467-fa011a5dfb0a",
-          "https://images.unsplash.com/photo-1640465978467-fa011a5dfb0a",
-          "https://images.unsplash.com/photo-1640465978467-fa011a5dfb0a",
-          "https://images.unsplash.com/photo-1640465978467-fa011a5dfb0a",
-          "https://images.unsplash.com/photo-1640465978467-fa011a5dfb0a",
         ],
       },
       {

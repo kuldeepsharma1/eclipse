@@ -27,7 +27,7 @@ import { Product } from '@/types/product';
 import { useCartStore } from '@/store/cart';
 import { useWishlistStore } from '@/store/wishlist';
 import { toast } from 'sonner';
-import { getProducts } from '@/app/actions/product';
+import { getProducts } from '@/actions/product';
 
 // Create metadata component
 function ProductMetadata({ product }: { product: Product }) {

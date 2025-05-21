@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { Lexend_Deca } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/Base/Footer";
-import Header from "@/components/Base/Header";
-import Providers from "./providers";
-import { Toaster } from "sonner";
 
-const lexendSans = Lexend_Deca({
-  variable: "--font-lexend-sans",
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,14 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${lexendSans.variable}  antialiased`}
-      >      <Providers>
-          <Header />
-
-          {children}
-          <Footer />
-          <Toaster />
-        </Providers>
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {children}
       </body>
     </html>
   );

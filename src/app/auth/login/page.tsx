@@ -1,7 +1,7 @@
 import { login } from "@/actions/auth/user";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
+import {  IconBrandGoogle } from "@tabler/icons-react";
 import { signIn } from "@/auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -38,10 +38,17 @@ const Login = async () => {
             />
           </div>
 
-          <div>
-            <Label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-              Password
-            </Label>
+          <div>            <div className="flex items-center justify-between">
+              <Label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Password
+              </Label>
+              <Link
+                href="/auth/forgot-password"
+                className="text-sm text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+              >
+                Forgot password?
+              </Link>
+            </div>
             <Input
               id="password"
               name="password"
@@ -68,18 +75,7 @@ const Login = async () => {
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <form action={async () => {
-            "use server";
-            await signIn("github");
-          }}>
-            <button
-              type="submit"
-              className="w-full flex items-center justify-center gap-2 py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600"
-            >
-              <IconBrandGithub className="h-5 w-5" />
-              Github
-            </button>
-          </form>
+    
 
           <form action={async () => {
             "use server";

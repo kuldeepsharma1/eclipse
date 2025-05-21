@@ -6,6 +6,8 @@ import { redirect } from "next/navigation";
 import { hash } from "bcryptjs";
 import { CredentialsSignin } from "next-auth";
 import { signIn } from "@/auth";
+import { generateVerificationToken } from "@/lib/tokens";
+import { sendVerificationEmail } from "@/lib/email";
 
 const login = async (formData: FormData) => {
   const email = formData.get("email") as string;
@@ -25,6 +27,8 @@ const login = async (formData: FormData) => {
   redirect("/");
 };
 
+
+
 const register = async (formData: FormData) => {
   const firstName = formData.get("firstname") as string;
   const lastName = formData.get("lastname") as string;
@@ -43,9 +47,22 @@ const register = async (formData: FormData) => {
 
   const hashedPassword = await hash(password, 12);
 
-  await EclipseUser.create({ firstName, lastName, email, password: hashedPassword });
+  const verificationToken = generateVerificationToken();
+  const verificationTokenExpiry = new Date(Date.now() + 86400000); // 24 hours
+
+  await EclipseUser.create({
+    firstName,
+    lastName,
+    email,
+    password: hashedPassword,
+    verificationToken,
+    verificationTokenExpiry,
+  });
+
+  await sendVerificationEmail(email, verificationToken);
+
   console.log(`User created successfully 🥂`);
-  redirect("/auth/login");
+  redirect("/auth/verification-sent");
 };
 
 const fetchAllUsers = async () => {

@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Lexend_Deca } from "next/font/google";
 import "./globals.css";
+import Footer from "@/components/Base/Footer";
+import Header from "@/components/Base/Header";
+import Providers from "./providers";
+import { Toaster } from "sonner";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const lexendSans = Lexend_Deca({
+  variable: "--font-lexend-sans",
   subsets: ["latin"],
 });
 
@@ -25,9 +24,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${lexendSans.variable}  antialiased`}
       >
-        {children}
+        <Providers>
+          <Header />
+
+          {children}
+          <Footer />
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );

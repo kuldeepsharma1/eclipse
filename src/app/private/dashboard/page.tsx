@@ -97,7 +97,8 @@ const Dashboard = async () => {
                         <TableCell>{user.name}</TableCell>
                         <TableCell>{user.email}</TableCell>
                         <TableCell>{user.role}</TableCell>
-                        <TableCell>{user.createdAt}</TableCell>
+                        <TableCell>{user.role}</TableCell>
+                        {/* <TableCell>{user.createdAt}</TableCell> */}
                       </TableRow>
                     ))}
                   </TableBody>

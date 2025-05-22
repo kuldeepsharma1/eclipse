@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
 import validator from "validator";
 
-// Interface for TypeScript type safety
+
 interface ICategory extends Document {
   name: string;
   slug: string;

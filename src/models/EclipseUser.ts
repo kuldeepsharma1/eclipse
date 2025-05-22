@@ -86,9 +86,12 @@ const userSchema = new mongoose.Schema<IEclipseUser>(
       type: String,
       select: false,
       minlength: [8, "Password must be at least 8 characters"],
-      validate: {
-        validator: (value: string) =>
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(value),
+     validate: {
+        validator: function (value: string) {
+          // Only validate if password is provided
+          if (!value) return true;
+          return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(value);
+        },
         message:
           "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
       },
@@ -272,30 +275,18 @@ const userSchema = new mongoose.Schema<IEclipseUser>(
 
 
 // Indexes for performance
-userSchema.index({ email: 1 });
 userSchema.index({ authProviderId: 1, authProviderType: 1 });
 userSchema.index({ "addresses.country": 1 });
 userSchema.index({ accountStatus: 1 });
 
 // Pre-save hook to parse Google OAuth name and ensure one default address
 userSchema.pre("save", async function (next) {
-  // Handle Google OAuth: Parse name into firstName and lastName
-  if (this.isNew && this.authProviderType === "google" && !this.firstName && !this.lastName) {
-    // Assume Google provides a full name via authProviderId or external logic
-    // For example, you might pass the name from Google in the creation logic
-    // Here, we'll set defaults if no name is provided
-    this.firstName = this.firstName || "User";
-    this.lastName = this.lastName || "";
-  }
-
-  // Ensure only one default address
   if (this.addresses.length > 0) {
     const defaultAddresses = this.addresses.filter((addr) => addr.isDefault);
     if (defaultAddresses.length > 1) {
       defaultAddresses.slice(1).forEach((addr) => (addr.isDefault = false));
     }
   }
-
   next();
 });
 

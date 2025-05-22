@@ -1,16 +1,16 @@
 'use client';
 
 import { useEffect, useState, useCallback, useTransition } from 'react';
-import { Filters, FilterOptions } from '@/components/General/shop/Filters';
-import { ProductGrid } from '@/components/General/shop/ProductGrid';
+import { Filters, FilterOptions } from '@/components/shop/Filters';
+import { ProductGrid } from '@/components/shop/ProductGrid';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Filter } from 'lucide-react';
 import { getProducts } from '@/actions/product';
 import { Product } from '@/types/product';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 
 // Filter options configuration
 const filterOptions: FilterOptions = {

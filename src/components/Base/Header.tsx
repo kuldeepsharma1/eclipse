@@ -5,6 +5,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import AppLogo from './AppLogo';
+import { Button } from '../ui/button';
+import { handleSignOut } from '@/actions/auth/user';
 
 type CountryOption = {
     code: string;
@@ -12,8 +14,11 @@ type CountryOption = {
     currency: string;
     flag: string;
 };
-
-export default function Header() {
+type User = {
+    name?: string;
+    email?: string;
+} | null;
+export default function Header({ user }: { user: User }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isAccountOpen, setIsAccountOpen] = useState(false);
@@ -75,7 +80,7 @@ export default function Header() {
 
                         {/* Logo - Centered on all screens */}
                         <Link href="/" className="text-2xl font-bold tracking-tight lg:absolute lg:left-1/2 lg:-translate-x-1/2">
-                           <AppLogo/>
+                            <AppLogo />
                         </Link>
 
                         {/* Right Actions */}
@@ -153,18 +158,51 @@ export default function Header() {
                                     </svg>
                                 </button>
 
+
                                 {isAccountOpen && (
-                                    <div className="absolute right-0 mt-2 w-60 bg-white rounded-lg shadow-lg border border-neutral-100">
-                                        <div className="p-4 border-b border-neutral-100">
-                                            <div className="font-medium">Account</div>
-                                            <p className="text-sm text-neutral-600 mt-1">Sign in for personalized experience</p>
-                                        </div>
+                                    <div className="absolute right-0 mt-3 w-64 bg-white rounded-xl shadow-xl border border-neutral-200 z-50 overflow-hidden transition-all duration-300 ease-in-out transform-gpu">
+                                        {user?.email ? (
+                                            <div className="p-5 bg-gradient-to-r from-neutral-50 to-neutral-100 border-b border-neutral-200">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-full bg-neutral-300 flex items-center justify-center text-neutral-800 font-semibold">
+                                                        {user.name?.[0] || user.email[0].toUpperCase()}
+                                                    </div>
+                                                    <div>
+                                                        <div className="font-semibold text-neutral-900 text-base">Welcome</div>
+                                                        <p className="text-sm text-neutral-600 truncate">{user.name || user.email}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div className="p-5 border-b border-neutral-200">
+                                                <div className="font-semibold text-neutral-900 text-base">Account</div>
+                                                <p className="text-sm text-neutral-500 mt-1">Sign in for a personalized experience</p>
+                                            </div>
+                                        )}
                                         <div className="py-2">
-                                            <Link href="/auth/login" className="block px-4 py-2 text-sm hover:bg-neutral-50 transition-colors">Sign In</Link>
-                                            <Link href="/auth/register" className="block px-4 py-2 text-sm hover:bg-neutral-50 transition-colors">Create Account</Link>
-                                            <Link href="/account/orders" className="block px-4 py-2 text-sm hover:bg-neutral-50 transition-colors">Orders</Link>
-                                            <Link href="/wishlist" className="block px-4 py-2 text-sm hover:bg-neutral-50 transition-colors">Wishlist</Link>
-                                            <Link href="/account/settings" className="block px-4 py-2 text-sm hover:bg-neutral-50 transition-colors">Settings</Link>
+                                            {!user?.email && (
+                                                <>
+                                                    <Link href="/auth/login" className="block px-5 py-3 text-sm text-neutral-700 hover:bg-neutral-100 transition-colors duration-200">Sign In</Link>
+                                                    <Link href="/auth/register" className="block px-5 py-3 text-sm text-neutral-700 hover:bg-neutral-100 transition-colors duration-200">Create Account</Link>
+                                                </>
+                                            )}
+
+                                            {user?.email && (
+                                                <>
+                                                    <Link href="/account/orders" className="block px-5 py-3 text-sm text-neutral-700 hover:bg-neutral-100 transition-colors duration-200">Orders</Link>
+                                                    <Link href="/wishlist" className="block px-5 py-3 text-sm text-neutral-700 hover:bg-neutral-100 transition-colors duration-200">Wishlist</Link>
+                                                    <Link href="/account/settings" className="block px-5 py-3 text-sm text-neutral-700 hover:bg-neutral-100 transition-colors duration-200">Settings</Link>
+                                                    <form action={handleSignOut}>
+                                                        <Button
+                                                            type="submit"
+                                                            variant="ghost"
+                                                            className="w-full text-left px-5 py-3 text-sm text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors duration-200"
+                                                        >
+                                                            Logout
+                                                        </Button>
+                                                    </form>
+                                                </>
+                                            )}
                                         </div>
                                     </div>
                                 )}

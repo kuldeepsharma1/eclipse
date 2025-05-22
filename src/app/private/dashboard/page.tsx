@@ -1,3 +1,4 @@
+import { fetchAllUsers } from "@/actions/auth/user";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -14,7 +15,7 @@ const Dashboard = async () => {
   const session = await getSession();
   const user = session?.user;
   if (!user) return redirect("/");
-
+  const allUsers = await fetchAllUsers();
   return (
     <div className="flex min-h-screen">
       <div className="flex-1 bg-gray-100 dark:bg-gray-950">
@@ -85,48 +86,20 @@ const Dashboard = async () => {
                     <TableRow>
                       <TableHead>Name</TableHead>
                       <TableHead>Email</TableHead>
-                      <TableHead>Plan</TableHead>
+                      <TableHead>Role</TableHead>
                       <TableHead>Date</TableHead>
                     </TableRow>
                   </TableHeader>
 
                   <TableBody>
-                    <TableRow>
-                      <TableCell>John Doe</TableCell>
-                      <TableCell>john@example.com</TableCell>
-                      <TableCell>Pro</TableCell>
-                      <TableCell>2024-04-16</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>John Doe</TableCell>
-                      <TableCell>john@example.com</TableCell>
-                      <TableCell>Pro</TableCell>
-                      <TableCell>2024-04-16</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>John Doe</TableCell>
-                      <TableCell>john@example.com</TableCell>
-                      <TableCell>Pro</TableCell>
-                      <TableCell>2024-04-16</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>John Doe</TableCell>
-                      <TableCell>john@example.com</TableCell>
-                      <TableCell>Pro</TableCell>
-                      <TableCell>2024-04-16</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>John Doe</TableCell>
-                      <TableCell>john@example.com</TableCell>
-                      <TableCell>Pro</TableCell>
-                      <TableCell>2024-04-16</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell>John Doe</TableCell>
-                      <TableCell>john@example.com</TableCell>
-                      <TableCell>Pro</TableCell>
-                      <TableCell>2024-04-16</TableCell>
-                    </TableRow>
+                    {allUsers?.map((user) => (
+                      <TableRow key={user._id}>
+                        <TableCell>{user.name}</TableCell>
+                        <TableCell>{user.email}</TableCell>
+                        <TableCell>{user.role}</TableCell>
+                        <TableCell>{user.createdAt}</TableCell>
+                      </TableRow>
+                    ))}
                   </TableBody>
                 </Table>
               </CardContent>

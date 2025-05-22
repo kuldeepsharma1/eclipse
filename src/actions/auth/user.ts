@@ -5,9 +5,10 @@ import { EclipseUser } from "@/models/EclipseUser";
 import { redirect } from "next/navigation";
 import { hash } from "bcryptjs";
 import { CredentialsSignin } from "next-auth";
-import { signIn } from "@/auth";
+import { signIn, signOut } from "@/auth";
 import { generateVerificationToken } from "@/lib/tokens";
 import { sendVerificationEmail } from "@/lib/email";
+import { getSession } from "@/lib/getSession";
 
 const login = async (formData: FormData) => {
   const email = formData.get("email") as string;
@@ -57,6 +58,7 @@ const register = async (formData: FormData) => {
     password: hashedPassword,
     verificationToken,
     verificationTokenExpiry,
+    authProviderType:'email'
   });
 
   await sendVerificationEmail(email, verificationToken);
@@ -71,4 +73,11 @@ const fetchAllUsers = async () => {
   return users;
 };
 
+export async function handleSignOut() {
+    await signOut();
+}
+export async function getUserSession() {
+    const session = await getSession();
+    return session?.user ?? null; // Return user or null if not logged in
+}
 export { register, login, fetchAllUsers };

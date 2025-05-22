@@ -102,7 +102,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const alreadyUser = await EclipseUser.findOne({ email });
 
           if (!alreadyUser) {
-            await EclipseUser.create({ email, name, image, isVerified: true, authProviderId: id });
+            await EclipseUser.create({ email, name, image, isVerified: true, authProviderId: id,authProviderType:'google' });
             return true;
           } else {
             return true;

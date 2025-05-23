@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Lexend_Deca } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/Base/Footer";
 import Providers from "./providers";
 import { Toaster } from "sonner";
-import HeaderWrapper from "@/components/Base/HeaderWrapper";
+
+
 
 const lexendSans = Lexend_Deca({
   variable: "--font-lexend-sans",
@@ -27,10 +27,8 @@ export default function RootLayout({
         className={`${lexendSans.variable}  antialiased`}
       >
         <Providers>
-          <HeaderWrapper />
-
+   
           {children}
-          <Footer />
           <Toaster />
         </Providers>
       </body>

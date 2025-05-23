@@ -11,7 +11,7 @@ const transporter = createTransport({
 });
 
 export const sendVerificationEmail = async (to: string, token: string) => {
-  const verificationUrl = `${process.env.APP_URL}/auth/verify?token=${token}`;
+  const verificationUrl = `${process.env.APP_URL}/verify?token=${token}`;
 
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,
@@ -29,7 +29,7 @@ export const sendVerificationEmail = async (to: string, token: string) => {
 };
 
 export const sendPasswordResetEmail = async (to: string, token: string) => {
-  const resetUrl = `${process.env.APP_URL}/auth/reset-password?token=${token}`;
+  const resetUrl = `${process.env.APP_URL}/reset-password?token=${token}`;
 
   await transporter.sendMail({
     from: process.env.EMAIL_FROM,

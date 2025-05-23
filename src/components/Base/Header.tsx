@@ -182,8 +182,8 @@ export default function Header({ user }: { user: User }) {
                                         <div className="py-2">
                                             {!user?.email && (
                                                 <>
-                                                    <Link href="/auth/login" className="block px-5 py-3 text-sm text-neutral-700 hover:bg-neutral-100 transition-colors duration-200">Sign In</Link>
-                                                    <Link href="/auth/register" className="block px-5 py-3 text-sm text-neutral-700 hover:bg-neutral-100 transition-colors duration-200">Create Account</Link>
+                                                    <Link href="/login" className="block px-5 py-3 text-sm text-neutral-700 hover:bg-neutral-100 transition-colors duration-200">Sign In</Link>
+                                                    <Link href="/register" className="block px-5 py-3 text-sm text-neutral-700 hover:bg-neutral-100 transition-colors duration-200">Create Account</Link>
                                                 </>
                                             )}
 

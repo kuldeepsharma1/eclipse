@@ -64,7 +64,7 @@ const register = async (formData: FormData) => {
   await sendVerificationEmail(email, verificationToken);
 
   console.log(`User created successfully 🥂`);
-  redirect("/auth/verification-sent");
+  redirect("/verification-sent");
 };
 
 const fetchAllUsers = async () => {
@@ -74,7 +74,7 @@ const fetchAllUsers = async () => {
 };
 
 export async function handleSignOut() {
-    await signOut();
+    await signOut({redirectTo:'/'});
 }
 export async function getUserSession() {
     const session = await getSession();

@@ -17,6 +17,7 @@ const login = async (formData: FormData) => {
   try {
     await signIn("credentials", {
       redirect: false,
+      redirectTo:'/',
       callbackUrl: "/",
       email,
       password,

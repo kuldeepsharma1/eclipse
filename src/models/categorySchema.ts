@@ -1,8 +1,8 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, {  Document } from "mongoose";
 import validator from "validator";
 
 
-interface ICategory extends Document {
+export interface ICategory extends Document {
   name: string;
   slug: string;
   description?: string;
@@ -16,7 +16,6 @@ interface ICategory extends Document {
     metaDescription?: string;
     keywords?: string[];
   };
-  metadata: Map<string, string | number | boolean | null>;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -97,12 +96,7 @@ const categorySchema = new mongoose.Schema<ICategory>(
         maxlength: [160, "Meta description cannot exceed 160 characters"],
       },
       keywords: [{ type: String, trim: true }],
-    },
-    metadata: {
-      type: Map,
-      of: Schema.Types.Mixed,
-      default: {},
-    },
+    }
   },
   {
     timestamps: true,
@@ -116,6 +110,15 @@ categorySchema.index({ slug: 1 });
 categorySchema.index({ parent: 1 });
 categorySchema.index({ isActive: 1, isFeatured: 1 });
 
+categorySchema.pre('validate', function (next) {
+  if (this.isModified('name') && !this.slug) {
+    this.slug = this.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+  }
+  next();
+});
 // Pre-save hook to populate ancestors
 categorySchema.pre("save", async function (next) {
   if (this.isModified("parent") || this.isNew) {

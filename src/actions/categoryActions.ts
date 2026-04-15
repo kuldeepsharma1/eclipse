@@ -7,6 +7,16 @@ import connectDB from '@/lib/db';
 import { auth } from '@/auth';
 import { Types } from 'mongoose';
 
+function generateSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .normalize('NFD') // split accented characters
+    .replace(/[\u0300-\u036f]/g, '') // remove accents
+    .replace(/[^a-z0-9]+/g, '-') // replace non-alphanumeric with hyphens
+    .replace(/^-+|-+$/g, '') // trim leading/trailing hyphens
+    .replace(/-{2,}/g, '-'); // collapse multiple hyphens
+}
+
 
 export async function createCategory(formData: FormData) {
   const session = await auth();
@@ -26,7 +36,7 @@ export async function createCategory(formData: FormData) {
         metaDescription: formData.get('metaDescription') as string,
         keywords: formData.get('keywords')?.toString().split(',').map(kw => kw.trim()) || [],
       },
-    
+
     };
 
     await Category.create(categoryData);
@@ -41,7 +51,7 @@ export async function createCategory(formData: FormData) {
 export async function getCategories() {
   try {
     await connectDB();
-    const categories = await Category.find({  }).sort({ name: 1 }).lean();
+    const categories = await Category.find({}).sort({ name: 1 }).lean();
     return JSON.parse(JSON.stringify(categories));
   } catch (error) {
     return { error: (error as Error).message };
@@ -59,6 +69,8 @@ export async function getFeaturedCategories() {
 }
 
 export async function updateCategory(categoryId: string, formData: FormData) {
+  const name = formData.get('name') as string;
+  const slug = generateSlug(name);
   const session = await auth();
   if (!session?.user?.id) throw new Error('Unauthorized');
 
@@ -66,7 +78,8 @@ export async function updateCategory(categoryId: string, formData: FormData) {
     await connectDB();
     const parentValue = formData.get('parent');
     const updateData: Partial<ICategory> = {
-      name: formData.get('name') as string,
+      name: name,
+      slug: slug,
       parent: parentValue && parentValue !== 'none' ? new Types.ObjectId(parentValue as string) : undefined,
       image: formData.get('image') as string,
       isActive: formData.get('isActive') === 'true',

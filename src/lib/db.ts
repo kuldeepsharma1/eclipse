@@ -1,67 +1,25 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-interface MongoDBConfig {
-  uri: string;
-  options?: mongoose.ConnectOptions;
-}
+let isConnected = false; 
 
-class DatabaseConnection {
-  private static instance: DatabaseConnection;
-  private isConnected: boolean = false;
 
-  private constructor() {}
-
-  public static getInstance(): DatabaseConnection {
-    if (!DatabaseConnection.instance) {
-      DatabaseConnection.instance = new DatabaseConnection();
-    }
-    return DatabaseConnection.instance;
+export default async function connectDB() {
+  if (isConnected) {
+    console.log('Using existing MongoDB connection');
+    return;
   }
 
-  public async connect(): Promise<void> {
-    if (this.isConnected) {
-      console.info('Already connected to MongoDB');
-      return;
-    }
+  try {
+    console.log('Connecting to MongoDB...');
 
-    const config: MongoDBConfig = {
-      uri: process.env.MONGO_URI!,
-      options: {
-        retryWrites: true,
-        w: 'majority',
-        maxPoolSize: 10,
-      },
-    };
-
-    try {
-      if (!config.uri) {
-        throw new Error('MongoDB URI is not defined in environment variables');
-      }
-
-      await mongoose.connect(config.uri, config.options);
-      this.isConnected = true;
-      console.info('Successfully connected to MongoDB');
-    } catch (error) {
-      this.isConnected = false;
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-      console.error(`MongoDB connection error: ${errorMessage}`);
-      throw new Error('Failed to establish MongoDB connection');
-    }
-
-    mongoose.connection.on('error', (error) => {
-      console.error('MongoDB connection error:', error);
-      this.isConnected = false;
+    await mongoose.connect(process.env.MONGO_URI!, {
+      bufferCommands: false, 
     });
 
-    mongoose.connection.on('disconnected', () => {
-      console.warn('MongoDB disconnected');
-      this.isConnected = false;
-    });
+    isConnected = true; 
+    console.log('MongoDB connected successfully');
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+    process.exit(1); 
   }
 }
-
-export const connectDB = async (): Promise<void> => {
-  await DatabaseConnection.getInstance().connect();
-};
-
-export default connectDB;

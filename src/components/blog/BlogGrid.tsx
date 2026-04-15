@@ -1,12 +1,11 @@
 'use client';
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+import { Card, CardContent } from '@/components/ui/card';
+
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Calendar, Clock, User, Eye, ThumbsUp, MessageCircle } from 'lucide-react';
+import { Calendar, Clock, Eye, ThumbsUp, MessageCircle } from 'lucide-react';
 import { BlogPost } from '@/types/blog';
 
 interface BlogGridProps {

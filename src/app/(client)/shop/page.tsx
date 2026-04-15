@@ -54,14 +54,14 @@ export default function ShopPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const [sortBy, setSortBy] = useState('featured');
 
   const [filters, setFilters] = useState({
-    categories: [],
-    brands: [],
-    sizes: [],
-    colors: [],
+    categories: [] as string[],
+    brands: [] as string[],
+    sizes: [] as string[],
+    colors: [] as string[],
     priceRange: [0, filterOptions.maxPrice] as [number, number],
   });
 
@@ -72,7 +72,7 @@ export default function ShopPage() {
   });
 
   // Calculate active filter count
-  const activeFilterCount = 
+  const activeFilterCount =
     filters.categories.length +
     filters.brands.length +
     filters.sizes.length +
@@ -102,35 +102,35 @@ export default function ShopPage() {
 
       // Apply category filter
       if (filters.categories.length > 0) {
-        result = result.filter(product => 
+        result = result.filter(product =>
           filters.categories.includes(product.category.toLowerCase())
         );
       }
 
       // Apply brand filter
       if (filters.brands.length > 0) {
-        result = result.filter(product => 
+        result = result.filter(product =>
           filters.brands.includes(product.brand?.toLowerCase() || '')
         );
       }
 
       // Apply size filter
+    
       if (filters.sizes.length > 0) {
-        result = result.filter(product => 
-          product.sizes?.some(size => filters.sizes.includes(size))
+        result = result.filter(product =>
+          product.size && filters.sizes.includes(product.size)
         );
       }
-
       // Apply color filter
       if (filters.colors.length > 0) {
-        result = result.filter(product => 
-          product.colors?.some(color => filters.colors.includes(color))
+        result = result.filter(product =>
+          product.color && filters.colors.includes(product.color)
         );
       }
 
       // Apply price range filter
-      result = result.filter(product => 
-        product.price >= filters.priceRange[0] && 
+      result = result.filter(product =>
+        product.price >= filters.priceRange[0] &&
         product.price <= filters.priceRange[1]
       );
 
@@ -147,7 +147,7 @@ export default function ShopPage() {
             return (b.rating || 0) - (a.rating || 0);
           case 'featured':
           default:
-            return b.featured ? 1 : -1;
+            return b.features ? 1 : -1;
         }
       });
 
@@ -161,7 +161,8 @@ export default function ShopPage() {
   }, [filterProducts]);
 
   // Handle filter changes
-  const handleFilterChange = (filterType: string, value: any) => {
+  type FilterValue = string[] | [number, number];
+  const handleFilterChange = (filterType: string, value: FilterValue) => {
     setFilters(prev => ({ ...prev, [filterType]: value }));
     setPagination(prev => ({ ...prev, page: 1 })); // Reset to first page when filters change
   };
@@ -218,7 +219,7 @@ export default function ShopPage() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="w-full px-4 pt-14 max-w-xs">
-           
+
                 {FiltersComponent}
               </SheetContent>
             </Sheet>
@@ -249,7 +250,7 @@ export default function ShopPage() {
           {!isMobile && (
             <div className="col-span-1">
               <div className="sticky top-6">
-                  {FiltersComponent}
+                {FiltersComponent}
               </div>
             </div>
           )}
@@ -271,12 +272,12 @@ export default function ShopPage() {
             ) : (
               <>
                 <ProductGrid products={paginatedProducts} />
-                
+
                 {/* Pagination */}
                 {pagination.total > pagination.perPage && (
                   <div className="flex justify-center gap-2 mt-8">
-                    {Array.from({ 
-                      length: Math.ceil(pagination.total / pagination.perPage) 
+                    {Array.from({
+                      length: Math.ceil(pagination.total / pagination.perPage)
                     }).map((_, i) => (
                       <Button
                         key={i}

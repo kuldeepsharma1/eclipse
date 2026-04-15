@@ -12,7 +12,7 @@ interface ProductInteraction {
   action: 'view' | 'addToCart' | 'addToWishlist' | 'removeFromWishlist' | 'share';
   timestamp: string;
   sessionId: string;
-  metadata?: Record<string, any>;
+  // metadata?: Record<string, any>;
 }
 
 // In a real application, these would be API calls to your analytics service
@@ -50,7 +50,7 @@ export function useProductAnalytics(product: Product | null) {
 
   const trackInteraction = (
     action: ProductInteraction['action'],
-    metadata?: Record<string, any>
+    // metadata?: string
   ) => {
     if (!product) return;
 
@@ -59,7 +59,7 @@ export function useProductAnalytics(product: Product | null) {
       action,
       timestamp: new Date().toISOString(),
       sessionId,
-      metadata
+  //  metadata
     });
   };
 

@@ -1,11 +1,18 @@
+
 import { Suspense } from 'react';
 import { getCategoryById } from '@/actions/categoryActions';
 import CategoryForm from '@/components/blog/CategoryForm';
 
-export default async function EditCategory({ params }: { params: { id: string } }) {
+type Props = {
+  params: {
+    id: string;
+  };
+};
+
+export default async function Page({ params }: Props) {
   const category = await getCategoryById(params.id);
 
-  if ('error' in category) {
+  if (!category || 'error' in category) {
     return <div>Error: Category not found</div>;
   }
 

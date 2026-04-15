@@ -35,7 +35,10 @@ interface FiltersProps {
     colors: string[];
     priceRange: [number, number];
   };
-  onFilterChange: (filterType: string, value: any) => void;
+  onFilterChange: (
+    filterType: 'categories' | 'brands' | 'sizes' | 'colors' | 'priceRange',
+    value: string[] | [number, number]
+  ) => void;
   onReset: () => void;
   activeFilterCount: number;
 }
@@ -206,7 +209,7 @@ export function Filters({
                 min={0}
                 step={5}
                 minStepsBetweenThumbs={1}
-                onValueChange={(value) => onFilterChange('priceRange', value)}
+                onValueChange={(value) => onFilterChange('priceRange', value as [number, number])}
                 className="w-full"
               />
               <div className="flex justify-between text-sm text-muted-foreground mt-3">

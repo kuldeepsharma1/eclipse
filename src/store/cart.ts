@@ -261,11 +261,11 @@ export const useCartStore = create<CartState>()(
         lastModified: new Date().toISOString(),
       }),
 
-      saveForLater: (itemId) => {
+      saveForLater: () => {
         // Implementation would move item to saved items list
       },
 
-      restoreCart: async (abandonedCartId) => {
+      restoreCart: async () => {
         // Implementation would restore cart from saved state
         return true;
       },

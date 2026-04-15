@@ -249,7 +249,7 @@ export const useWishlistStore = create<WishlistState>()(
         }
       },
 
-      incrementViews: (productId) => set((state) => {
+      incrementViews: () => set((state) => {
         const analytics = { ...state.analytics };
         analytics.totalViews++;
         analytics.lastViewed = new Date().toISOString();

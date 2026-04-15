@@ -3,14 +3,14 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
-import { Metadata } from 'next';
+
 import { Button } from '@/components/ui/button';
 import { 
   Card, 
   CardContent,
   CardFooter,
   CardHeader,
-  CardTitle,
+
 } from '@/components/ui/card';
 import { Breadcrumb } from '@/components/ui/breadcrumb';
 import {
@@ -200,21 +200,21 @@ export default function ProductPage() {
   const currentPrice = currentVariant?.price || product.price;
   const inStock = currentVariant ? currentVariant.stock > 0 : (product.stock || 0) > 0;
 
-  const breadcrumbItems = [
-    { label: 'Shop', href: '/shop' },
-    ...(product.categories?.slice(0, -1).map(category => ({
-      label: category,
-      href: `/shop?category=${encodeURIComponent(category.toLowerCase())}`
-    })) || []),
-    { label: product.name, href: `/product/${product.id}` }
-  ];
+  // const breadcrumbItems = [
+  //   { label: 'Shop', href: '/shop' },
+  //   ...(product.categories?.slice(0, -1).map(category => ({
+  //     label: category,
+  //     href: `/shop?category=${encodeURIComponent(category.toLowerCase())}`
+  //   })) || []),
+  //   { label: product.name, href: `/product/${product.id}` }
+  // ];
 
   return (
     <>
       {product && <ProductMetadata product={product} />}
       <div className="container mx-auto px-4 py-12">
         <div className="mb-8">
-          <Breadcrumb items={breadcrumbItems} />
+          <Breadcrumb  />
         </div>
         
         {/* Rest of the product page content... */}
@@ -441,9 +441,9 @@ export default function ProductPage() {
                         <div>
                           <h4 className="font-medium mb-2">Product Dimensions:</h4>
                           <p className="text-gray-600">
-                            {product.shippingInfo.dimensions.length}" L x{' '}
-                            {product.shippingInfo.dimensions.width}" W x{' '}
-                            {product.shippingInfo.dimensions.height}" H
+                            {product.shippingInfo.dimensions.length} L x{' '}
+                            {product.shippingInfo.dimensions.width} W x{' '}
+                            {product.shippingInfo.dimensions.height} H
                           </p>
                         </div>
                         <div>

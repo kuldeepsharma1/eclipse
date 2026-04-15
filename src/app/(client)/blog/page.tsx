@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { BlogGrid } from '@/components/blog/BlogGrid';
-import { Button } from '@/components/ui/button';
+
 import { Input } from '@/components/ui/input';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs,  TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { Search } from 'lucide-react';
 import { getBlogPosts } from '@/actions/blogActions';

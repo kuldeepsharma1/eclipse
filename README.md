@@ -13,7 +13,7 @@ Eclipse is a modern and sophisticated fashion brand specializing in high-quality
 
 ## Shop Online
 
-Visit our online store at [eclipse.com](https://eclipse.com) to browse our latest collections.
+Visit our online store to browse our latest collections.
 
 ## Collection Highlights
 
@@ -25,7 +25,7 @@ Visit our online store at [eclipse.com](https://eclipse.com) to browse our lates
 ## Customer Service
 
 For inquiries about orders, sizing, or returns:
-- Email: support@eclipse.com
+- Email:
 - Phone: 
 - Hours: Monday-Friday, 9AM-5PM EST
 
